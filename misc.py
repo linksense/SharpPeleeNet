@@ -2,7 +2,6 @@ import torch
 import torch.nn as nn
 
 from collections import OrderedDict
-from modules.iabn import InPlaceABN
 
 
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
@@ -30,32 +29,6 @@ class SCSEBlock(nn.Module):
 
         chn_se = self.channel_se(x).exp()
         spa_se = self.spatial_se(x).exp()
-
-        return torch.mul(torch.mul(inputs, chn_se), spa_se)
-
-
-class InplaceSCSEBlock(nn.Module):
-    def __init__(self, channel, reduct_ratio=16, norm_act=InPlaceABN):
-        super(InplaceSCSEBlock, self).__init__()
-
-        self.in_abn = norm_act(channel)
-        self.channel_se = nn.Sequential(OrderedDict([("avgpool", nn.AdaptiveAvgPool2d(1)),
-                                                     ("linear1", nn.Conv2d(channel, channel // reduct_ratio,
-                                                                           kernel_size=1, stride=1, padding=0)),
-                                                     ("relu", nn.ReLU(inplace=True)),
-                                                     ("linear2", nn.Conv2d(channel // reduct_ratio, channel,
-                                                                           kernel_size=1, stride=1, padding=0)),
-                                                     ("score", nn.Sigmoid())]))
-
-        self.spatial_se = nn.Sequential(OrderedDict([("conv", nn.Conv2d(channel, 1, kernel_size=1, stride=1,
-                                                                        padding=0, bias=False)),
-                                                     ("score", nn.Sigmoid())]))
-
-    def forward(self, x):
-        inputs = x.clone()
-        bn = self.in_abn(x)
-        chn_se = self.channel_se(bn.clone()).exp()
-        spa_se = self.spatial_se(bn.clone()).exp()
 
         return torch.mul(torch.mul(inputs, chn_se), spa_se)
 
