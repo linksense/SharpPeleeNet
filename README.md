@@ -6,3 +6,9 @@ ImageNet pre-trained Weight can be find here: **[SharpPeleeNet (Google Drive)](h
 Model | Version | Acc@1 | Acc@5
 --- | --- | --- | ---
 SharpPeleeNet | Pytorch | 72.204 | 91.375
+
+
+<p align="center">
+<img src="https://github.com/ansleliu/SharpPeleeNet/blob/master/SharpNet%231.png" />
+<img src="https://github.com/ansleliu/SharpPeleeNet/blob/master/SharpNet%232.png" />
+</p>
