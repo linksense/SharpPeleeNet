@@ -3,7 +3,7 @@ ImageNet pre-trained SharpPeleeNet can be used in real-time Semantic Segmentatio
 
 ImageNet pre-trained Weight can be find here: **[SharpPeleeNet (Google Drive)](https://drive.google.com/open?id=18drR8S433MIAN1d7CmHLXsuB4EQIrWWa)**
 
-The SharpNet pre-trained model with USM(Unsharp Mask)-Operator Block (see Fig#3) embedded into network will be release later!!!
+**The SharpNet pre-trained model with USM(Unsharp Mask)-Operator Block (see Fig#3) embedded into network will be release later!!!**
 
 Model | Version | Acc@1 | Acc@5
 --- | --- | --- | ---
